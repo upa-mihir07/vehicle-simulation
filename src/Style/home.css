@@ -1,0 +1,25 @@
+.all_veh_container{
+    width: 100%;
+    margin-top: 7vw;
+    margin-left: 7vw;
+    margin-right: 7vw;
+}
+
+.add_home_btns{
+    display: flex;
+    gap: 1.5vw;
+    flex-direction: row-reverse;
+    margin: 1.5vh 0vh;
+}
+
+.select_scene{
+    margin-bottom: 2vh;
+}
+#label{
+    font-size: larger;
+}
+.select_scene select{
+    margin-top: 1vh;
+    font-size: larger;
+    width: 8vw;
+}

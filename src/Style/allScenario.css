@@ -1,0 +1,21 @@
+.all_scene_container{
+    width: 100%;
+    margin: 7vw;
+}
+.all_scene_container_nav {
+    display: flex;
+    align-items: center;
+}
+.all_scene_container_nav h1{
+    flex: 1;
+}
+.all_scenario_btns {
+    display: flex;
+    gap: 1vw;
+    height: 4vh;
+}
+.all_scene_container_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
