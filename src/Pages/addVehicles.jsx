@@ -50,6 +50,7 @@ function AddVehicles() {
                 vehicle.map(v => {
                     if(v.vehicleID === location.state.vehicleID) {
                         setEdit(true)
+                        setVeh({sceneName: sc.sceneName, vehicleName: v.vehicleName, speed: v.speed, posX: v.posX, posY: v.posY, direction: v.direction})
                     }
                     return v;
                 })
