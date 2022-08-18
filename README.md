@@ -25,3 +25,10 @@ Areas that can be improved
  * Used basic validation, this can be improved.
  * Complete Responsiveness can be achieved.
  
+ 
+Some Files
+-------------------
+
+ * ***sceneReducer.js*** : This file is contains the code for handling different actions that need to be performed on our state. I have written reducers for the Adding vehicle and scenarios, Editing vehicles and scenarios, and Removing the vehicles and scenarios. Also a Remove all functionality is there, which will return the empty data. 
+ * Also I have used localstorage to store the data. Redux store on any changes sync the data with the local storage and, while loading store sync the data with localstorage.
+ * ***sceneTable.jsx, vehicalTable.jsx*** : These files implements the table in the All Scenario and Home componets using react-table package.
