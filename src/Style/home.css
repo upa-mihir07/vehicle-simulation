@@ -23,3 +23,9 @@
     font-size: larger;
     width: 8vw;
 }
+
+#restartButton{
+    background-color: darkorange;
+    padding: 0.4vw 1vw;
+    cursor: pointer;
+}

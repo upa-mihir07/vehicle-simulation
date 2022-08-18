@@ -1,19 +1,26 @@
 import React, {useState} from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import '../Style/addVehicles.css'
 import { actionCreators} from '../redux/index'
-import { useLocation } from 'react-router-dom';
+
 
 function AddVehicles() {
+
+    // usestate 
     const [veh, setVeh] = useState({sceneName: '', vehicleName: '', speed: 0, posX: 0, posY: 0, direction: ''})
     const [edit, setEdit] = useState(false)
 
+    // Redux, fetching store data/ dispatching actions
     const scene =  useSelector(state => state.scene)
     const dispatch = useDispatch()
 
+    // Navigation specific
+    const navigate = useNavigate();
     let location = useLocation()
 
+    // Handlers of Add and reset button
     const AddHandler = () => {
         console.log("Add pressed");
         if(edit) {
@@ -32,31 +39,17 @@ function AddVehicles() {
     }
 
     const ResetHandler = () => {
-        console.log("Reset Handler pressed");
         setVeh({sceneName: '', vehicleName: '', speed: 0, posX: 0, posY: 0, direction: ''})
     }
 
-    const RemoveScenario = () => {
-        dispatch(actionCreators.removeVehicle({id: 1, vehicleID: 1}))
-    }
-
-    console.table(scene)
-    console.log(veh)
-
+    // prefill input field with existing data when editing the vehicle
     if(location.state?.id && !edit) {
-        console.log("AB", location.state)
         scene.map(sc => {
             if(sc.id === location.state.id) {
                 let vehicle = sc.vehicles;
                 vehicle.map(v => {
-                    console.log("HAAAYE", v)
                     if(v.vehicleID === location.state.vehicleID) {
-                        console.log("AA", location.state.id, location.state.vehicleID)
-                        // location.state.id = 0
                         setEdit(true)
-                        setVeh({sceneName: sc.sceneName, vehicleName: v.vehicleName, speed: v.speed, posX: v.posX, posY: v.posY, direction: v.direction})
-                        console.log("BB")
-                        console.log("AA", location.state.id)
                     }
                     return v;
                 })
@@ -69,18 +62,16 @@ function AddVehicles() {
     <div className='add_scenario'>
         <h1>Add Vehicle</h1>
         <div className='add_vehicle_input'>
-            
                 <div className='add_veh_input'>
                     <label>Scenario Name</label>
                     <br />
-                    {/* <input type="text" placeholder='Test Scenario' value={veh.sceneName} onChange={e => {setVeh((prev) => ({...prev,sceneName: e.target.value}))}}></input> */}
                     <select style={{fontSize: 'large'}} value={veh.sceneName} onChange={e => {setVeh((prev) => {
                         console.log("Hello luv", e.target.value)
                         return ({...prev,sceneName: e.target.value})})}}>
                         <option>Select Scenario</option>
                         {
-                            scene.map(s => {
-                                return <option value={s.sceneName} defaultValue>{s.sceneName}</option>
+                            scene.map((s,i) => {
+                                return <option key={i} value={s.sceneName} defaultValue>{s.sceneName}</option>
                             })
                         }
                     </select>
@@ -118,7 +109,6 @@ function AddVehicles() {
                 <div className='add_veh_input'>
                     <label>Direction</label>
                     <br />
-                    {/* <input type="text" placeholder='Forward' value={veh.direction} onChange={e => {setVeh((prev) => ({...prev,direction: e.target.value}))}}></input> */}
                     <select style={{fontSize: 'large'}} value={veh.direction} onChange={e => {setVeh((prev) => ({...prev,direction: e.target.value}))}}>
                         <option>Direction</option>
                         <option value="Forward">Forward</option>
@@ -132,7 +122,7 @@ function AddVehicles() {
         <div className='add_scenario_btns'>
             <div id='btn1' onClick={addhandler}>Add</div>
             <div id='btn2' onClick={ResetHandler}>Reset</div>
-            <div id='btn3' onClick={RemoveScenario}>Go Back</div>
+            <div id='btn3' onClick={() => navigate(-1)}>Go Back</div>
         </div>
     </div>
   )

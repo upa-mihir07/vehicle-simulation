@@ -1,0 +1,58 @@
+body {
+    display: grid;
+    place-items: center;
+  }
+
+  .circle {
+    width: 100px;
+    height: 100px;
+    background-color: #D72638;
+    border-radius: 50%;
+
+    animation-name: scaleUp;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(.17, .67, .32, 1.55)
+  }
+
+  @keyframes scaleUp {
+    0% {
+      transform: scale(3, 3);
+    }
+
+    50% {
+      transform: scale(-.5, -.5);
+    }
+
+    100% {
+      transform: scale(3, 3);
+    }
+  }
+
+  .container {
+    width: 500px;
+    height: 500px;
+    box-shadow: 0px 10px 20px #666;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background-color: #FFFD98;
+    border-radius: 10px;
+    align-items: end;
+  }
+
+  #restartButton {
+    margin-bottom: 40px;
+    padding: 5px;
+    font-weight: bold;
+    border: none;
+    outline: 2px solid #0880ff;
+    border-radius: 5px;
+    background-color: #FFF;
+  }
+
+  #restartButton:hover {
+    outline-width: 5px;
+    background-color: #EAF4FF;
+  }
