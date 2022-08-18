@@ -1,9 +1,0 @@
-.scenary_container {
-    max-width: 100%;
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid blackred;
-    background-color: white;
-    color: black;
-    margin-bottom: 2px;
-}

@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import '../Style/addScenarios.css'
-
 import { actionCreators} from '../redux/index'
-import { useLocation } from 'react-router-dom';
 
 function AddScenarios() {
 
     const [sceneName, setSceneName] = useState('')
     const [sceneTime, setSceneTime] = useState(0)
-
     const [edit, setEdit] = useState(false)
 
+    // Redux, fetching store data/ dispatching actions
     const scene =  useSelector(state => state.scene)
     const dispatch = useDispatch()
 
+    // Navigation specific
+    const navigate = useNavigate();
     let location = useLocation()
-
+    
+    // Handlers of Add and reset button
     const AddHandler = () => {
         console.log("Add pressed");
         if(edit) {
@@ -29,19 +31,14 @@ function AddScenarios() {
         ResetHandler();
     }
     const ResetHandler = () => {
-        console.log("Reset Handler pressed");
         setSceneName('')
         setSceneTime('')
     }
-    const RemoveScenario = () => {
-        dispatch(actionCreators.removeScene({id: 1}))
-    }
 
+    // prefill input field with existing data when editing the scenario
     if(location.state?.id && !edit) {
-        console.log("Vehicle AB")
         scene.map(sc => {
             if(sc.id === location.state.id) {
-                console.log("Vehicle ABCD")
                 setEdit(true)
                 setSceneName(sc.sceneName)
                 setSceneTime(sc.sceneTime)
@@ -50,7 +47,6 @@ function AddScenarios() {
         })
     }
 
-  console.table(scene)
   return (
     <div className='add_scenario'>
         <h1>Add Scenario</h1>
@@ -68,14 +64,13 @@ function AddScenarios() {
                     {
                         sceneTime < 0 ?  <div className='warning'><p>Time should be greater than 0!!</p></div>:  null
                     }
-                </div>
-                
+                </div>                
             </div>
         </div>
         <div className='add_scenario_btns'>
             <div id='btn1' onClick={ (sceneTime < 0 || sceneName === '')  ? () => alert("Please Enter Correct Input") : AddHandler}>Add</div>
             <div id='btn2' onClick={ResetHandler}>Reset</div>
-            <div id='btn3' onClick={RemoveScenario}>Go Back {scene.sceneID}</div>
+            <div id='btn3' onClick={() => navigate(-1)}>Go Back {scene.sceneID}</div>
         </div>
     </div>
   )

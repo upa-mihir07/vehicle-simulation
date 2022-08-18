@@ -43,8 +43,6 @@ const SceneTable = ()=> {
 
   const data = useMemo(() => dat, [])
 
-  console.log("Haaaatee", dat)
-
   const tableInstance = useTable({
     columns: COLUMNS,
     data: dat
